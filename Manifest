@@ -1,0 +1,13 @@
+lib/ambition/adapters/ambitious_sphinx/base.rb
+lib/ambition/adapters/ambitious_sphinx/query.rb
+lib/ambition/adapters/ambitious_sphinx/select.rb
+lib/ambition/adapters/ambitious_sphinx/slice.rb
+lib/ambition/adapters/ambitious_sphinx/sort.rb
+lib/ambition/adapters/ambitious_sphinx.rb
+LICENSE
+README
+test/helper.rb
+test/select_test.rb
+test/slice_test.rb
+test/sort_test.rb
+Manifest

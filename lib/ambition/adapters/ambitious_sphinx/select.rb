@@ -55,7 +55,7 @@ module Ambition
         # >> select { |u| u.name != 'chris' }
         # => #not_equal( call(:name), 'chris' )
         def not_equal(left, right)
-          raise "Not implemented."
+          "#{left} -#{right}"
         end
 
         # >> select { |u| u.name =~ 'chris' }

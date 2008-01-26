@@ -5,6 +5,12 @@ context "AmbitiousSphinx Adapter :: Select" do
     @klass = User
   end
   
+  # FIXME why doesn't this work?
+  def do_select(block)
+    hash = @klass.select { block.call }.to_hash
+    hash[:query]
+  end
+  
   specify "string" do
     query = @klass.select { 'jon' }.to_hash[:query]
     query.should == %Q(jon)
@@ -15,9 +21,9 @@ context "AmbitiousSphinx Adapter :: Select" do
     query.should == %Q(@name jon)
   end
 
-  xspecify "!=" do
-    translator = @klass.select { |m| m.name != 'jon' }
-    translator.to_s.should == %Q(foo)
+  specify "!=" do
+    query = @klass.select { |m| m.name != 'jon' }.to_hash[:query]
+    query.to_s.should == %Q(@name -jon)
   end
 
   xspecify "== && ==" do

@@ -11,10 +11,14 @@ context "AmbitiousSphinx Adapter :: Select" do
     query = User.select { 'jon' }.to_hash[:query]
     query.should == "jon"
   end
+  
+  xspecify "Ruby string becomes Sphinx phrase search" do
+    query = User.select { 'jon doe' }.to_hash[:query]
+    query.should == "\"jon doe\""
+  end
 
-  specify "Ruby == becomes Sphinx field search operator" do
-    query = User.select { |m| m.name == 'jon' }.to_hash[:query]
-    query.should == "@name jon"
+  specify "Ruby == should not be supported" do
+    should.raise { User.select { |m| m.name == 'jon' } }
   end
 
   specify "Ruby != becomes Sphinx NOT operator" do
@@ -32,15 +36,9 @@ context "AmbitiousSphinx Adapter :: Select" do
     query.should == "jon | 21"
   end
 
-  xspecify "array.include? item" do
-    translator = User.select { |m| [1, 2, 3, 4].include? m.id }
-    translator.to_s.should == %Q(foo)
-  end
-
-  xspecify "variabled array.include? item" do
-    array = [1, 2, 3, 4]
-    translator = User.select { |m| array.include? m.id }
-    translator.to_s.should == %Q(foo)
+  specify "Ruby String.include? becomes Sphinx field search operator" do
+    query = User.select { |m| m.name.include? "jon" }.to_hash[:query]
+    query.should == "@name jon"
   end
 
   xspecify "=~ with string" do

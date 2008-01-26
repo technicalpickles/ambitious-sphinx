@@ -28,7 +28,7 @@ module Ambition
           #
           #   #downcase(:name)
           #
-          raise "Not implemented."
+          raise "Not implemented yet."
         end
 
         # &&

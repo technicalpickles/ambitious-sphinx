@@ -85,7 +85,23 @@ context "AmbitiousSphinx Adapter :: Select" do
     translator = User.select { |m| m.created_at == Time.now.to_s }
     translator.to_s.should == %Q(foo)
   end
-
+  
+  specify "Ruby > should not be supported" do
+    should.raise { User.select { |m| m.age > 21 } }
+  end
+  
+  specify "Ruby >= should not be supported" do
+    should.raise { User.select { |m| m.age >= 21 } }
+  end
+  
+  specify "Ruby < should not be supported" do
+    should.raise { User.select { |m| m.age < 21 } }
+  end
+  
+  specify "Ruby <= should not be supported" do
+    should.raise { User.select { |m| m.age <= 21 } }
+  end
+  
   xspecify "inspect" do
     User.select { |u| u.name }.inspect.should.match %r(call #to_s or #to_hash)
   end

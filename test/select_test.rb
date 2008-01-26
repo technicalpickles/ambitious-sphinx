@@ -2,49 +2,34 @@ require File.dirname(__FILE__) + '/helper'
 
 context "AmbitiousSphinx Adapter :: Select" do
   
-  context "Ruby && becomes Sphinx &" do    
-    specify "when using fields with ==" do
-      query = User.select { |m| m.name == 'jon' && m.age == 21 }.to_hash[:query]
-      query.should == %Q(@name jon & @age 21)
-    end
-
-    specify "when using strings without fields" do
-      query = User.select {'jon' && 'blarg'}.to_hash[:query]
-      query.should == %Q(jon & blarg)
-    end
-  end
-
-  context "Ruby || becomes Sphinx |" do
-    specify "== || ==" do
-      query = User.select { |m| m.name == 'jon' || m.age == 21 }.to_hash[:query]
-      query.should == %Q(@name jon | @age 21)
-    end
-
-    specify "string || string" do
-      query = User.select { 'jon' || 21 }.to_hash[:query]
-      query.should == %Q(jon | 21)
-    end
+  specify "Ruby attributes become Sphinx fields prefixed with @" do
+    query = User.select { |m| m.name }.to_hash[:query]
+    query.should == "@name"
   end
   
-  # FIXME why doesn't this work?
-  def do_select(block)
-    hash = User.select { block.call }.to_hash
-    hash[:query]
-  end
-  
-  specify "string" do
+  specify "Ruby string becomes Sphinx string" do
     query = User.select { 'jon' }.to_hash[:query]
-    query.should == %Q(jon)
+    query.should == "jon"
   end
 
-  specify "==" do
+  specify "Ruby == becomes Sphinx field search operator" do
     query = User.select { |m| m.name == 'jon' }.to_hash[:query]
-    query.should == %Q(@name jon)
+    query.should == "@name jon"
   end
 
-  specify "!=" do
+  specify "Ruby != becomes Sphinx NOT operator" do
     query = User.select { |m| m.name != 'jon' }.to_hash[:query]
-    query.to_s.should == %Q(@name -jon)
+    query.to_s.should == "@name -jon"
+  end
+  
+  specify "Ruby && becomes Sphinx AND operator" do
+    query = User.select { 'jon' && 'blarg' }.to_hash[:query]
+    query.should == "jon & blarg"
+  end
+
+  specify "Ruby || becomes Sphinx OR operator" do
+    query = User.select { 'jon' || 21 }.to_hash[:query]
+    query.should == "jon | 21"
   end
 
   xspecify "mixed && and ||" do

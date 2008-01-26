@@ -1,5 +1,21 @@
 require File.dirname(__FILE__) + '/helper'
 
+context "ruby's && operator is translated to sphinx's & operator" do
+  setup do
+    @klass = User
+  end
+
+  specify "when using fields with ==" do
+    q = @klass.select { |m| m.name == 'jon' && m.age == 21 }.to_hash[:query]
+    q.to_s.should == %Q(@name jon & @age 21)
+  end
+
+  specify "when using strings without fields" do
+    query = @klass.select {'jon' && 'blarg'}.to_hash[:query]
+    query.should == %Q(jon & blarg)
+  end
+end
+
 context "AmbitiousSphinx Adapter :: Select" do
   setup do
     @klass = User
@@ -24,16 +40,6 @@ context "AmbitiousSphinx Adapter :: Select" do
   specify "!=" do
     query = @klass.select { |m| m.name != 'jon' }.to_hash[:query]
     query.to_s.should == %Q(@name -jon)
-  end
-
-  xspecify "== && ==" do
-    translator = @klass.select { |m| m.name == 'jon' && m.age == 21 }
-    translator.to_s.should == %Q(@name jon & @age 21)
-  end
-
-  specify "string && string" do
-    query = @klass.select {'jon' && 'blarg'}.to_hash[:query]
-    query.should == %Q(jon & blarg)
   end
 
   specify "== || ==" do

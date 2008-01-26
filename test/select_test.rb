@@ -6,7 +6,7 @@ context "AmbitiousSphinx Adapter :: Select" do
   end
   
   specify "string" do
-    query = @klass.select { 'jon'}.to_hash[:query]
+    query = @klass.select { 'jon' }.to_hash[:query]
     query.should == %Q(jon)
   end
 
@@ -46,21 +46,10 @@ context "AmbitiousSphinx Adapter :: Select" do
     translator.to_s.should == %Q(foo)
   end
 
-  xspecify "grouped && and ||" do
-    translator = @klass.select { |m| (m.name == 'jon' || m.name == 'rick') && m.age == 21 }
-    translator.to_s.should == %Q(foo)
-  end
-
-  xspecify ">/<" do
-    translator = @klass.select { |m| m.age > 21 }
-    translator.to_s.should == %Q(foo)
-
-    translator = @klass.select { |m| m.age >= 21 }
-    translator.to_s.should == %Q(foo)
-
-    translator = @klass.select { |m| m.age < 21 }
-    translator.to_s.should == %Q(foo)
-  end
+  # xspecify "grouped && and ||" do
+  #     translator = @klass.select { |m| (m.name == 'jon' || m.name == 'rick') && m.age == 21 }
+  #     translator.to_s.should == %Q(foo)
+  #   end
 
   xspecify "array.include? item" do
     translator = @klass.select { |m| [1, 2, 3, 4].include? m.id }
@@ -120,9 +109,6 @@ context "AmbitiousSphinx Adapter :: Select" do
   xspecify "=~ with string" do
     translator = @klass.select { |m| m.name =~ 'chris' }
     translator.to_s.should == %Q(foo)
-
-    translator = @klass.select { |m| m.name =~ 'chri%' }
-    translator.to_s.should == %Q(foo)
   end
 
   xspecify "!~ with string" do
@@ -134,17 +120,15 @@ context "AmbitiousSphinx Adapter :: Select" do
   end
 
   xspecify "=~ with regexp" do
-    translator = @klass.select { |m| m.name =~ /chris/ }
-    translator.to_s.should == %Q(foo)
+    should.raise { @klass.select { |m| m.name =~ /chris/ } }
   end
 
   xspecify "=~ with regexp flags" do
-    translator = @klass.select { |m| m.name =~ /chris/i }
-    translator.to_s.should == %Q(foo)
+    should.raise { @klass.select { |m| m.name =~ /chris/i } }
   end
 
   xspecify "downcase" do
-    translator = @klass.select { |m| m.name.downcase =~ 'chris%' }
+    translator = @klass.select { |m| m.name.downcase =~ 'chris' }
     translator.to_s.should == %Q(foo)
   end
 

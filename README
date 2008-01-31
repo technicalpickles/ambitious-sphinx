@@ -7,7 +7,6 @@ How about finding all tweets that have "Obama" in the any of its attributes?
 
 Tweet.select { "Obama" }
 
-
 What about tweets with "McCain" and "Clinton"?
 
 Tweet.select { "McCain" && "Clinton" }
@@ -15,6 +14,10 @@ Tweet.select { "McCain" && "Clinton" }
 "Edwards" or "Huckabee" ?
 
 Tweet.select { "Edwards" || "Huckabee" }
+
+
+### Big honking disclaimer
+
 
 
 ### Getting Started
@@ -29,8 +32,11 @@ You will need the following gems to use ambitious-sphinx:
 
     sudo rake install
     
-  At some point in your code:
+  Require our files somewhere, like at the end of config/environment.rb
+  
     require 'ambition/adapters/ambitious_sphinx'
+    
+  You will also need to go through the motions of setting up ultrasphinx. This includes setting up sphinx itself, and modifying your model to indicate what's to be indexed
 
 ### Playing with the code base
 
@@ -46,6 +52,7 @@ Run the tests with:
 ### More information on Sphinx:
 
  -> http://www.sphinxsearch.com/
+ -> http://blog.evanweaver.com/articles/2007/07/09/ultrasphinx-searching-the-world-in-231-seconds/
  -> http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html
 
 ### More information on Ambition:

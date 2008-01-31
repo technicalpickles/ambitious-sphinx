@@ -9,7 +9,7 @@ begin
   require 'echoe'
 
   Echoe.new('ambitious-sphinx') do |p|
-    # p.dependencies  << '<%= adapter_name %> >=1.0'
+    p.dependencies  << 'ultrasphinx >=1.7'
     p.summary        = "An ambitious adapter for sphinx"
     p.author         = 'Your Name'
     p.email          = "your@email.com"

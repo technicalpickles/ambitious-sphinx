@@ -1,6 +1,54 @@
-<%= string = "An Ambitious #{adapter_module} Adapter" %>
-<%= '=' * string.size %>
+An Ambitious Sphinx Adapter
+===========================
 
-More information on Ambition:
+Ever want to do some sexy full text searching?
+
+How about finding all tweets that have "Obama" in the any of its attributes?
+
+Tweet.select { "Obama" }
+
+
+What about tweets with "McCain" and "Clinton"?
+
+Tweet.select { "McCain" && "Clinton" }
+
+"Edwards" or "Huckabee" ?
+
+Tweet.select { "Edwards" || "Huckabee" }
+
+
+### Getting Started
+
+You will need the following gems to use ambitious-sphinx:
+
+  gem install ambition
+  gem install ultrasphinx
+  
+
+  Now install it as ambitious-sphinx:
+
+    sudo rake install
+    
+  At some point in your code:
+    require 'ambition/adapters/ambitious_sphinx'
+
+### Playing with the code base
+
+In addition to the other dependencies, you'll need:
+
+  gem install echoe redgreen mocha test-spec
+  
+Run the tests with:
+  
+  rake test
+  
+
+### More information on Sphinx:
+
+ -> http://www.sphinxsearch.com/
+ -> http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html
+
+### More information on Ambition:
+
 -> http://ambition.rubyforge.org
 -> http://groups.google.com/group/ambition-rb/

@@ -36,7 +36,7 @@ You will need the following gems to use ambitious-sphinx:
   
     require 'ambition/adapters/ambitious_sphinx'
     
-  You will also need to go through the motions of setting up ultrasphinx. This includes setting up sphinx itself, and modifying your model to indicate what's to be indexed
+  You will also need to go through the motions of setting up ultrasphinx. This includes setting up sphinx itself, and modifying your model to indicate what's to be indexed, and so on.
 
 ### Playing with the code base
 

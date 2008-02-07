@@ -68,7 +68,8 @@ module Ambition
         # >> select { |u| u.name !~ 'chris' }
         # => #not_regexp( call(:name), 'chris' )
         def not_regexp(left, right)
-          raise "Not applicable to sphinx."
+          "NOT #{left}#{quotify right}"
+          # could be DRYer, but this is more readable than: "NOT #{self.=~(left,right)}"
         end
 
         ##

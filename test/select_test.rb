@@ -45,12 +45,9 @@ context "AmbitiousSphinx Adapter :: Select" do
     query.should == %Q(name:"chris" AND name:"jon")
   end
 
-  xspecify "Ruby !~ with string" do
-    translator = User.select { |m| m.name !~ 'chris' }
-    translator.to_s.should == %Q(foo)
-
-    translator = User.select { |m| !(m.name =~ 'chris') }
-    translator.to_s.should == %Q(foo)
+  specify "Ruby !~ with string" do
+    query = User.select { |m| m.name =~ 'chris' && m.name !~ 'jon' }.to_hash[:query]
+    query.should == %Q(name:"chris" AND NOT name:"jon")
   end
 
   xspecify "=~ with regexp" do

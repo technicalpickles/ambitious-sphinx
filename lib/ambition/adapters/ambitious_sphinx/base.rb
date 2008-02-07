@@ -2,7 +2,7 @@ module Ambition
   module Adapters
     module AmbitiousSphinx
       class Base
-        def field? str
+        def has_field? str
           str =~ /:/
         end
         
@@ -10,8 +10,12 @@ module Ambition
           str =~ /(AND|OR|NOT)/
         end
         
+        def needs_quoting? str
+          not (has_operator?(str) or has_field?(str))
+        end
+        
         def quotify str
-          unless field?(str) or has_operator?(str)
+          if needs_quoting?(str)
             "\"#{str}\""
           else
             str

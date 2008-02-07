@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/helper'
 context "AmbitiousSphinx Adapter :: Sort" do
   setup do
     @klass = User
-    @block = @klass.select { |m| m.name.include? 'jon' }
+    @block = @klass.select { |m| m.name =~ 'jon' }
   end
 
   xspecify "order" do

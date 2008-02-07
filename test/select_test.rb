@@ -35,24 +35,14 @@ context "AmbitiousSphinx Adapter :: Select" do
     query.should == %Q("jon" OR "chris")
   end
 
-  specify "Ruby String.include? becomes Sphinx field search operator" do
-    query = User.select { |m| m.name.include? "jon" }.to_hash[:query]
-    query.should == %Q(name:"jon")
-  end
-  
-  specify "Mixed String and field" do
-    query = User.select { |m| m.name.include?("jon") && "chris"}.to_hash[:query]
-    query.should == %Q(name:"jon" AND "chris")
-  end
-  
-  specify "Mixed field and string" do
-    query = User.select { |m| "chris" && m.name.include?("jon")}.to_hash[:query]
-    query.should == %Q("chris" AND name:"jon")
-  end
-
-  xspecify "Ruby =~ with string" do
+  specify "Ruby =~ with string" do
     translator = User.select { |m| m.name =~ 'chris' }
-    translator.to_s.should == %Q(foo)
+    translator.to_s.should == %Q(name:"chris")
+  end
+  
+  specify "Ruby =~ with string" do
+    translator = User.select { |m| m.name =~ 'chris' && m.name =~ 'jon' }
+    translator.to_s.should == %Q(name:"chris" AND name:"jon")
   end
 
   xspecify "!~ with string" do

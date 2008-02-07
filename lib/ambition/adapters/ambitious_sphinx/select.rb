@@ -61,7 +61,7 @@ module Ambition
         # >> select { |u| u.name =~ 'chris' }
         # => #=~( call(:name), 'chris' )
         def =~(left, right)
-          raise "Not applicable to sphinx."
+          "#{left}#{quotify right}"
         end
 
         # !~
@@ -92,7 +92,7 @@ module Ambition
         # >> select { |u| [1, 2, 3].include? u.id }
         # => #include?( [1, 2, 3], call(:id) )
         def include?(left, right)
-          "#{left}#{quotify right}"
+          raise "Not applicable to sphinx."
         end
         
         def field? str

@@ -57,30 +57,6 @@ context 'AmbitiousSphinx Adapter :: Select' do
   specify 'Ruby !~ with Regexp is not supported' do
     should.raise do User.select {|m| m.name !~ /chris/} end
   end
-
-  xspecify 'downcase' do
-    translator = User.select {|m| m.name.downcase =~ 'chris'}
-    translator.to_s.should == %Q(foo)
-  end
-
-  xspecify 'upcase' do
-    translator = User.select {|m| m.name.upcase =~ 'chris%'}
-    translator.to_s.should == %Q(foo)
-  end
-
-  xspecify 'undefined equality symbol' do
-    should.raise do User.select {|m| m.name =* /chris/} end
-  end
-
-  xspecify 'block variable / assigning variable conflict' do
-    m = User.select {|m| m.name == 'chris'}
-    m.should == %Q(foo)
-  end
-  
-  xspecify '== with inline ruby' do
-    translator = User.select { |m| m.created_at == Time.now.to_s }
-    translator.to_s.should == %Q(foo)
-  end
   
   specify 'Ruby > should not be supported' do
     should.raise do User.select {|m| m.age > 21} end

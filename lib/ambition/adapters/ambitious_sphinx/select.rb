@@ -61,6 +61,7 @@ module Ambition
         # >> select { |u| u.name =~ 'chris' }
         # => #=~( call(:name), 'chris' )
         def =~(left, right)
+          raise if right.is_a? Regexp
           "#{left}#{quotify right}"
         end
 
@@ -68,6 +69,7 @@ module Ambition
         # >> select { |u| u.name !~ 'chris' }
         # => #not_regexp( call(:name), 'chris' )
         def not_regexp(left, right)
+          raise if right.is_a? Regexp
           raise "Not applicable to sphinx."
         end
 

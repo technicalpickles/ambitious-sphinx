@@ -44,6 +44,10 @@ context "AmbitiousSphinx Adapter :: Select" do
     translator = User.select { |m| m.name =~ 'chris' && m.name =~ 'jon' }
     translator.to_s.should == %Q(name:"chris" AND name:"jon")
   end
+  
+  specify "Ruby =~ with Regexp" do
+    should.raise { User.select { |m| m.name =~ /chris/ } }
+  end
 
   xspecify "!~ with string" do
     translator = User.select { |m| m.name !~ 'chris' }
@@ -52,9 +56,9 @@ context "AmbitiousSphinx Adapter :: Select" do
     translator = User.select { |m| !(m.name =~ 'chris') }
     translator.to_s.should == %Q(foo)
   end
-
-  xspecify "=~ with regexp" do
-    should.raise { User.select { |m| m.name =~ /chris/ } }
+  
+  specify "Ruby !~ with Regexp" do
+    should.raise { User.select { |m| m.name !~ /chris/ } }
   end
 
   xspecify "=~ with regexp flags" do

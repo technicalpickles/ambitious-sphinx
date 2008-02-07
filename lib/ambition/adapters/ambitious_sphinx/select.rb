@@ -35,15 +35,14 @@ module Ambition
         # >> select { |u| u.name == 'chris' && u.age == 22 }
         # => #both( processed left side, processed right side )
         def both(left, right)
-          left = 
-          "#{left} AND #{right}"
+          "#{quotify left} AND #{quotify right}"
         end
 
         # ||
         # >> select { |u| u.name == 'chris' || u.age == 22 }
         # => #either( processed left side, processed right side )
         def either(left, right)
-          "#{left} OR #{right}"
+          "#{quotify left} OR #{quotify right}"
         end
 
         # >> select { |u| u.name == 'chris' }
@@ -93,15 +92,15 @@ module Ambition
         # >> select { |u| [1, 2, 3].include? u.id }
         # => #include?( [1, 2, 3], call(:id) )
         def include?(left, right)
-          "#{left}#{right}"
+          "#{left}#{quotify right}"
         end
         
         def field? str
           str =~ /:/
         end
         
-        def quotify string
-          "\"#{string}\"" unless field?
+        def quotify str
+          "\"#{str}\"" unless field? str
         end
       end
     end

@@ -27,20 +27,20 @@ context "AmbitiousSphinx Adapter :: Select" do
   
   specify "Ruby && becomes Sphinx AND operator" do
     query = User.select { 'jon' && 'blarg' }.to_hash[:query]
-    query.should == "jon AND blarg"
+    query.should == %Q("jon" AND "blarg")
   end
 
   specify "Ruby || becomes Sphinx OR operator" do
-    query = User.select { 'jon' || 21 }.to_hash[:query]
-    query.should == "jon OR 21"
+    query = User.select { 'jon' || 'chris' }.to_hash[:query]
+    query.should == %Q("jon" OR "chris")
   end
 
   specify "Ruby String.include? becomes Sphinx field search operator" do
     query = User.select { |m| m.name.include? "jon" }.to_hash[:query]
-    query.should == "name:jon"
+    query.should == %Q(name:"jon")
   end
 
-  xspecify "=~ with string" do
+  xspecify "Ruby =~ with string" do
     translator = User.select { |m| m.name =~ 'chris' }
     translator.to_s.should == %Q(foo)
   end

@@ -39,6 +39,11 @@ context "AmbitiousSphinx Adapter :: Select" do
     query = User.select { |m| m.name.include? "jon" }.to_hash[:query]
     query.should == %Q(name:"jon")
   end
+  
+  xspecify "Mixed String and field" do
+    query = User.select { |m| m.name.include? "jon" && "chris"}.to_hash[:query]
+    query.should == %Q(name:"jon" && "chris")
+  end
 
   xspecify "Ruby =~ with string" do
     translator = User.select { |m| m.name =~ 'chris' }

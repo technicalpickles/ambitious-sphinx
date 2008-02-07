@@ -69,8 +69,9 @@ module Ambition
         # >> select { |u| u.name !~ 'chris' }
         # => #not_regexp( call(:name), 'chris' )
         def not_regexp(left, right)
+          # could be DRYer, but this is more readable than: "NOT #{self.=~(left,right)}"
           raise if right.is_a? Regexp
-          raise "Not applicable to sphinx."
+          "NOT #{left}#{quotify right}"
         end
 
         ##
@@ -99,10 +100,6 @@ module Ambition
         
         def field? str
           str =~ /:/
-        end
-        
-        def entirely_quoted? str
-           str =~ /^\".*\"$/
         end
         
         def quotify str

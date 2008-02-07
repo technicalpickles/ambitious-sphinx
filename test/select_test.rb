@@ -41,20 +41,17 @@ context 'AmbitiousSphinx Adapter :: Select' do
   end
   
   specify 'Ruby =~ with string' do
-    translator = User.select {|m| m.name =~ 'chris' && m.name =~ 'jon'}
-    translator.to_s.should == %Q(name:"chris" AND name:"jon")
+    query = User.select {|m| m.name =~ 'chris' && m.name =~ 'jon'}.to_hash[:query]
+    query.should == %Q(name:"chris" AND name:"jon")
   end
   
   specify 'Ruby =~ with Regexp' do
     should.raise do User.select {|m| m.name =~ /chris/} end
   end
 
-  xspecify '!~ with string' do
-    translator = User.select {|m| m.name !~ 'chris'}
-    translator.to_s.should == %Q(foo)
-
-    translator = User.select {|m| !(m.name =~ 'chris')}
-    translator.to_s.should == %Q(foo)
+  specify 'Ruby !~ with string' do
+    query = User.select {|m| m.name =~ 'chris' && m.name !~ 'jon'}.to_hash[:query]
+    query.should == %Q(name:"chris" AND NOT name:"jon")
   end
   
   specify 'Ruby !~ with Regexp' do

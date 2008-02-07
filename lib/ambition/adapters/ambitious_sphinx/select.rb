@@ -61,6 +61,7 @@ module Ambition
         # >> select { |u| u.name =~ 'chris' }
         # => #=~( call(:name), 'chris' )
         def =~(left, right)
+          raise if right.is_a? Regexp
           "#{left}#{quotify right}"
         end
 
@@ -68,8 +69,9 @@ module Ambition
         # >> select { |u| u.name !~ 'chris' }
         # => #not_regexp( call(:name), 'chris' )
         def not_regexp(left, right)
-          "NOT #{left}#{quotify right}"
           # could be DRYer, but this is more readable than: "NOT #{self.=~(left,right)}"
+          raise if right.is_a? Regexp
+          "NOT #{left}#{quotify right}"
         end
 
         ##

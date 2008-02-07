@@ -97,18 +97,6 @@ module Ambition
         def include?(left, right)
           raise "Not applicable to sphinx."
         end
-        
-        def field? str
-          str =~ /:/
-        end
-        
-        def quotify str
-          unless field? str
-            "\"#{str}\""
-          else
-            str
-          end
-        end
       end
     end
   end

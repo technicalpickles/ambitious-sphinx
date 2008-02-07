@@ -2,10 +2,17 @@ module Ambition
   module Adapters
     module AmbitiousSphinx
       class Base
-        ##
-        # Extract common functionality into this class.
-        # All your classes, by default, inherit from this
-        # one -- Query and the Translators.
+        def field? str
+          str =~ /:/
+        end
+        
+        def quotify str
+          unless field? str
+            "\"#{str}\""
+          else
+            str
+          end
+        end
       end
     end
   end

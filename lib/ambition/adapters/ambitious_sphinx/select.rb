@@ -11,7 +11,7 @@ module Ambition
         # >> select { |u| u.name == 'chris' } 
         # => #call(:name)
         def call(method)
-          "@#{method.to_s}"
+          "#{method.to_s}:"
         end
 
         # >> select { |u| u.name.downcase == 'chris' } 
@@ -35,14 +35,15 @@ module Ambition
         # >> select { |u| u.name == 'chris' && u.age == 22 }
         # => #both( processed left side, processed right side )
         def both(left, right)
-          "#{left} & #{right}"
+          left = 
+          "#{left} AND #{right}"
         end
 
         # ||
         # >> select { |u| u.name == 'chris' || u.age == 22 }
         # => #either( processed left side, processed right side )
         def either(left, right)
-          "#{left} | #{right}"
+          "#{left} OR #{right}"
         end
 
         # >> select { |u| u.name == 'chris' }
@@ -55,7 +56,7 @@ module Ambition
         # >> select { |u| u.name != 'chris' }
         # => #not_equal( call(:name), 'chris' )
         def not_equal(left, right)
-          "#{left} -#{right}"
+          raise "Not applicable to sphinx."
         end
 
         # >> select { |u| u.name =~ 'chris' }
@@ -92,7 +93,15 @@ module Ambition
         # >> select { |u| [1, 2, 3].include? u.id }
         # => #include?( [1, 2, 3], call(:id) )
         def include?(left, right)
-          "#{left} #{right}"
+          "#{left}#{right}"
+        end
+        
+        def field? str
+          str =~ /:/
+        end
+        
+        def quotify string
+          "\"#{string}\"" unless field?
         end
       end
     end

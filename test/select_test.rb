@@ -4,7 +4,7 @@ context "AmbitiousSphinx Adapter :: Select" do
   
   specify "Ruby attributes become Sphinx fields prefixed with @" do
     query = User.select { |m| m.name }.to_hash[:query]
-    query.should == "@name"
+    query.should == "name:"
   end
   
   specify "Ruby string becomes Sphinx string" do
@@ -22,23 +22,22 @@ context "AmbitiousSphinx Adapter :: Select" do
   end
 
   specify "Ruby != becomes Sphinx NOT operator" do
-    query = User.select { |m| m.name != 'jon' }.to_hash[:query]
-    query.to_s.should == "@name -jon"
+    should.raise { User.select { |m| m.name != 'jon' } }
   end
   
   specify "Ruby && becomes Sphinx AND operator" do
     query = User.select { 'jon' && 'blarg' }.to_hash[:query]
-    query.should == "jon & blarg"
+    query.should == "jon AND blarg"
   end
 
   specify "Ruby || becomes Sphinx OR operator" do
     query = User.select { 'jon' || 21 }.to_hash[:query]
-    query.should == "jon | 21"
+    query.should == "jon OR 21"
   end
 
   specify "Ruby String.include? becomes Sphinx field search operator" do
     query = User.select { |m| m.name.include? "jon" }.to_hash[:query]
-    query.should == "@name jon"
+    query.should == "name:jon"
   end
 
   xspecify "=~ with string" do

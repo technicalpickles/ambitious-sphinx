@@ -16,7 +16,7 @@ module Ambition
         
         def quotify str
           if needs_quoting?(str)
-            "\"#{str}\""
+            %Q("#{str}")
           else
             str
           end

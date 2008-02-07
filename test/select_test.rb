@@ -1,111 +1,111 @@
 require File.dirname(__FILE__) + '/helper'
 
-context "AmbitiousSphinx Adapter :: Select" do
+context 'AmbitiousSphinx Adapter :: Select' do
   
-  specify "Ruby attributes become Sphinx fields prefixed with @" do
-    query = User.select { |m| m.name }.to_hash[:query]
+  specify 'Ruby attributes become Sphinx fields prefixed with @' do
+    query = User.select {|m| m.name}.to_hash[:query]
     query.should == "name:"
   end
   
-  specify "Ruby string becomes Sphinx string" do
-    query = User.select { 'jon' }.to_hash[:query]
+  specify 'Ruby string becomes Sphinx string' do
+    query = User.select {'jon'}.to_hash[:query]
     query.should == "jon"
   end
   
-  xspecify "Ruby string becomes Sphinx phrase search" do
-    query = User.select { 'jon doe' }.to_hash[:query]
+  xspecify 'Ruby string becomes Sphinx phrase search' do
+    query = User.select {'jon doe'}.to_hash[:query]
     query.should == "\"jon doe\""
   end
 
-  specify "Ruby == should not be supported" do
-    should.raise { User.select { |m| m.name == 'jon' } }
+  specify 'Ruby == should not be supported' do
+    should.raise do User.select {|m| m.name == 'jon'} end
   end
 
-  specify "Ruby != becomes Sphinx NOT operator" do
-    should.raise { User.select { |m| m.name != 'jon' } }
+  specify 'Ruby != becomes Sphinx NOT operator' do
+    should.raise do User.select {|m| m.name != 'jon'} end
   end
   
-  specify "Ruby && becomes Sphinx AND operator" do
-    query = User.select { 'jon' && 'blarg' }.to_hash[:query]
+  specify 'Ruby && becomes Sphinx AND operator' do
+    query = User.select {'jon' && 'blarg'}.to_hash[:query]
     query.should == %Q("jon" AND "blarg")
   end
 
-  specify "Ruby || becomes Sphinx OR operator" do
-    query = User.select { 'jon' || 'chris' }.to_hash[:query]
+  specify 'Ruby || becomes Sphinx OR operator' do
+    query = User.select { 'jon' || 'chris'}.to_hash[:query]
     query.should == %Q("jon" OR "chris")
   end
 
-  specify "Ruby =~ with string" do
-    translator = User.select { |m| m.name =~ 'chris' }
+  specify 'Ruby =~ with string' do
+    translator = User.select {|m| m.name =~ 'chris'}
     translator.to_s.should == %Q(name:"chris")
   end
   
-  specify "Ruby =~ with string" do
-    translator = User.select { |m| m.name =~ 'chris' && m.name =~ 'jon' }
+  specify 'Ruby =~ with string' do
+    translator = User.select {|m| m.name =~ 'chris' && m.name =~ 'jon'}
     translator.to_s.should == %Q(name:"chris" AND name:"jon")
   end
   
-  specify "Ruby =~ with Regexp" do
-    should.raise { User.select { |m| m.name =~ /chris/ } }
+  specify 'Ruby =~ with Regexp' do
+    should.raise do User.select {|m| m.name =~ /chris/} end
   end
 
-  xspecify "!~ with string" do
-    translator = User.select { |m| m.name !~ 'chris' }
+  xspecify '!~ with string' do
+    translator = User.select {|m| m.name !~ 'chris'}
     translator.to_s.should == %Q(foo)
 
-    translator = User.select { |m| !(m.name =~ 'chris') }
+    translator = User.select {|m| !(m.name =~ 'chris')}
     translator.to_s.should == %Q(foo)
   end
   
-  specify "Ruby !~ with Regexp" do
-    should.raise { User.select { |m| m.name !~ /chris/ } }
+  specify 'Ruby !~ with Regexp' do
+    should.raise do User.select {|m| m.name !~ /chris/} end
   end
 
-  xspecify "=~ with regexp flags" do
-    should.raise { User.select { |m| m.name =~ /chris/i } }
+  xspecify '=~ with regexp flags' do
+    should.raise do User.select {|m| m.name =~ /chris/i} end
   end
 
-  xspecify "downcase" do
-    translator = User.select { |m| m.name.downcase =~ 'chris' }
+  xspecify 'downcase' do
+    translator = User.select {|m| m.name.downcase =~ 'chris'}
     translator.to_s.should == %Q(foo)
   end
 
-  xspecify "upcase" do
-    translator = User.select { |m| m.name.upcase =~ 'chris%' }
+  xspecify 'upcase' do
+    translator = User.select {|m| m.name.upcase =~ 'chris%'}
     translator.to_s.should == %Q(foo)
   end
 
-  xspecify "undefined equality symbol" do
-    should.raise { User.select { |m| m.name =* /chris/ } }
+  xspecify 'undefined equality symbol' do
+    should.raise do User.select {|m| m.name =* /chris/} end
   end
 
-  xspecify "block variable / assigning variable conflict" do
-    m = User.select { |m| m.name == 'chris' }
+  xspecify 'block variable / assigning variable conflict' do
+    m = User.select {|m| m.name == 'chris'}
     m.should == %Q(foo)
   end
   
-  xspecify "== with inline ruby" do
+  xspecify '== with inline ruby' do
     translator = User.select { |m| m.created_at == Time.now.to_s }
     translator.to_s.should == %Q(foo)
   end
   
-  specify "Ruby > should not be supported" do
-    should.raise { User.select { |m| m.age > 21 } }
+  specify 'Ruby > should not be supported' do
+    should.raise do User.select {|m| m.age > 21} end
   end
   
-  specify "Ruby >= should not be supported" do
-    should.raise { User.select { |m| m.age >= 21 } }
+  specify 'Ruby >= should not be supported' do
+    should.raise do User.select {|m| m.age >= 21} end
   end
   
-  specify "Ruby < should not be supported" do
-    should.raise { User.select { |m| m.age < 21 } }
+  specify 'Ruby < should not be supported' do
+    should.raise do User.select {|m| m.age < 21} end
   end
   
-  specify "Ruby <= should not be supported" do
-    should.raise { User.select { |m| m.age <= 21 } }
+  specify 'Ruby <= should not be supported' do
+    should.raise do User.select {|m| m.age <= 21} end
   end
   
-  xspecify "inspect" do
+  xspecify 'inspect' do
     User.select { |u| u.name }.inspect.should.match %r(call #to_s or #to_hash)
   end
 end

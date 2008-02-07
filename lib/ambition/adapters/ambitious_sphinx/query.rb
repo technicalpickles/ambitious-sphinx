@@ -36,7 +36,7 @@ module Ambition
         end
 
         def size
-          raise "Example: owner.count(to_hash)"
+          raise "Not implemented yet."
         end
 
         def to_hash

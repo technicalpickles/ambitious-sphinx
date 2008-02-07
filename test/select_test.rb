@@ -9,10 +9,10 @@ context 'AmbitiousSphinx Adapter :: Select' do
   
   specify 'Ruby string becomes Sphinx string' do
     query = User.select {'jon'}.to_hash[:query]
-    query.should == "jon"
+    query.should == %Q("jon")
   end
   
-  xspecify 'Ruby string becomes Sphinx phrase search' do
+  specify 'Ruby string becomes Sphinx phrase search' do
     query = User.select {'jon doe'}.to_hash[:query]
     query.should == "\"jon doe\""
   end

@@ -44,7 +44,7 @@ module Ambition
 
           unless (query = clauses[:select]).blank?
             query_s = query.join(' ').squeeze(' ').strip 
-            hash[:query] = query_s
+            hash[:query] = quotify(query_s)
           end
           
           hash

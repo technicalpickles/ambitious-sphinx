@@ -99,8 +99,16 @@ module Ambition
           str =~ /:/
         end
         
+        def entirely_quoted? str
+           str =~ /^\".*\"$/
+        end
+        
         def quotify str
-          "\"#{str}\"" unless field? str
+          unless field? str
+            "\"#{str}\""
+          else
+            str
+          end
         end
       end
     end

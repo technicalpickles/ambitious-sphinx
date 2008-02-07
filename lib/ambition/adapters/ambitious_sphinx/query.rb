@@ -52,9 +52,7 @@ module Ambition
 
         def to_s
           hash = to_hash
-          
-          query = hash[:query]
-          "{:query => '#{query}'}"
+          hash[:query]
         end
       end
     end

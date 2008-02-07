@@ -40,9 +40,14 @@ context "AmbitiousSphinx Adapter :: Select" do
     query.should == %Q(name:"jon")
   end
   
-  xspecify "Mixed String and field" do
-    query = User.select { |m| m.name.include? "jon" && "chris"}.to_hash[:query]
-    query.should == %Q(name:"jon" && "chris")
+  specify "Mixed String and field" do
+    query = User.select { |m| m.name.include?("jon") && "chris"}.to_hash[:query]
+    query.should == %Q(name:"jon" AND "chris")
+  end
+  
+  specify "Mixed field and string" do
+    query = User.select { |m| "chris" && m.name.include?("jon")}.to_hash[:query]
+    query.should == %Q("chris" AND name:"jon")
   end
 
   xspecify "Ruby =~ with string" do

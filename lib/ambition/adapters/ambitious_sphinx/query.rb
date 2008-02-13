@@ -21,7 +21,7 @@ module Ambition
             query_s = query.join(' ').squeeze(' ').strip 
             hash[:query] = quotify(query_s)
           end
-          
+
           hash
         end
 

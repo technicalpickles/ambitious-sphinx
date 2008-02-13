@@ -2,7 +2,7 @@ module Ambition
   module Adapters
     module AmbitiousSphinx
       # Select is responsible for taking pure Ruby, and mangling it until it resembles
-      # the syntax that UltraSphinx[http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html] uses.
+      # the syntax that Ultrasphinx[http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html] uses.
       class Select < Base
         # method calls
         # converts
@@ -10,30 +10,25 @@ module Ambition
           "#{method.to_s}:"
         end
 
-        # chained calls not supported
+        # Should we be supporting chained calls like:
+        #
+        #   u.name.downcase
+        #
+        # ?
+        # 
+        # I don't think Sphinx would be able to handle this.
         def chained_call(*methods)
-          # An idiom here is to call the chained method and pass it
-          # the first method.
-          #
-          #   if respond_to? methods[1]
-          #     send(methods[1], methods[0])
-          #   end
-          #
-          # In the above example, this translates to calling:
-          #
-          #   #downcase(:name)
-          #
           raise "Not implemented yet."
         end
 
-        # Handles generating an UltraSphinx query for code like:
+        # Handles generating an Ultrasphinx query for code like:
         #
         #   'foo' && 'bar'
         def both(left, right)
           "#{quotify left} AND #{quotify right}"
         end
 
-        # Handles generating an UltraSphinx query for code like:
+        # Handles generating an Ultrasphinx query for code like:
         #
         #   'foo' || 'bar'
         def either(left, right)
@@ -50,42 +45,59 @@ module Ambition
           raise "Not applicable to sphinx."
         end
 
-        # >> select { |u| u.name =~ 'chris' }
-        # => #=~( call(:name), 'chris' )
+        # Handles generating an Ultrasphinx query for code like:
+        #
+        #   u.name =~ 'bob'
+        #
+        # Some cavaets:
+        #  * left hand side _must_ be a field, like u.name
+        #  * right hand side _must not_ be a regular expression. Pattern matching is generally not
+        #    supported by full text search engines
         def =~(left, right)
           raise if right.is_a? Regexp
           "#{left}#{quotify right}"
         end
 
-        # !~
-        # >> select { |u| u.name !~ 'chris' }
-        # => #not_regexp( call(:name), 'chris' )
+        # Handles generating an Ultrasphinx query for code like:
+        #
+        #   u.name !~ 'bob'
+        #
+        # Some cavaets:
+        #  * left hand side _must_ be a field, like u.name
+        #  * right hand side _must not_ be a regular expression. Pattern matching is generally not
+        #    supported by full text search engines
         def not_regexp(left, right)
           # could be DRYer, but this is more readable than: "NOT #{self.=~(left,right)}"
           raise if right.is_a? Regexp
           "NOT #{left}#{quotify right}"
         end
 
-        ##
-        # Etc.
+        # Not supported by Sphinx. If you need this kind of comparison, you probably should be
+        # using ambitious-activerecord.
         def <(left, right)
           raise "Not applicable to sphinx."
         end
 
+        # Not supported by Sphinx. If you need this kind of comparison, you probably should be
+        # using ambitious-activerecord.
         def >(left, right)
           raise "Not applicable to sphinx."
         end
 
+        # Not supported by Sphinx. If you need this kind of comparison, you probably should be
+        # using ambitious-activerecord.
         def >=(left, right)
           raise "Not applicable to sphinx."
         end
 
+        # Not supported by Sphinx. If you need this kind of comparison, you probably should be
+        # using ambitious-activerecord.
         def <=(left, right)
           raise "Not applicable to sphinx."
         end
 
-        # >> select { |u| [1, 2, 3].include? u.id }
-        # => #include?( [1, 2, 3], call(:id) )
+        # Not supported by Sphinx. If you need this kind of comparison, you probably should be
+        # using ambitious-activerecord.
         def include?(left, right)
           raise "Not applicable to sphinx."
         end

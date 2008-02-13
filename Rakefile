@@ -10,12 +10,12 @@ begin
 
   Echoe.new('ambitious-sphinx') do |p|
     p.dependencies  << 'ultrasphinx >=1.7'
-    p.summary        = "An ambitious adapter for sphinx"
-    p.author         = 'Your Name'
-    p.email          = "your@email.com"
+    p.summary        = 'An ambitious adapter for sphinx'
+    p.author         = 'Josh Nichols'
+    p.email          = 'josh@technicalpickles.com'
 
     p.project        = 'ambition'
-    p.url            = "http://ambition.rubyforge.org/"
+    p.url            = 'http://ambitious-sphinx.rubyforge.org/'
     p.test_pattern   = 'test/*_test.rb'
     p.version        = Version
     p.dependencies  << 'ambition >=0.5.0'

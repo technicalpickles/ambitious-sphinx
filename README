@@ -1,24 +1,28 @@
 An Ambitious Sphinx Adapter
 ===========================
 
-Ever want to do some sexy full text searching?
+I don't know about you, but I like me some sexy full-text searching.
 
-How about finding all tweets that have "Obama" in the any of its attributes?
+Want to find all meals that mention bacon?
 
-Tweet.select { "Obama" }
+  Meal.select {'bacon'}
 
-What about tweets with "McCain" and "Clinton"?
+What about bacon bits and sour cream?
 
-Tweet.select { "McCain" && "Clinton" }
+  Meal.select {'bacon bits' && 'sour cream'}
 
-"Edwards" or "Huckabee" ?
+Maybe with bacon in the name, or cheese in the recipe?
 
-Tweet.select { "Edwards" || "Huckabee" }
+  Meal.select {|m| m.name =~ 'bacon' || m.recipe =~ 'cheese'}
 
+Cheese in the name, but not grilled?
+
+  Meal.select {|m| m.name =~ 'bacon' && m.name !~ 'grilled'}
+  
 
 ### Big honking disclaimer
 
-
+We're still learning a lot about how sphinx and ambition work, so things are likely to change a lot.
 
 ### Getting Started
 

@@ -1,21 +1,16 @@
-##
-# The format of the documentation herein is:
-#
-# >> method with block
-# => methods on this class called by Ambition (with arguments)
-#
 module Ambition
   module Adapters
     module AmbitiousSphinx
+      # Select is responsible for taking pure Ruby, and mangling it until it resembles
+      # the syntax that UltraSphinx[http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html] uses.
       class Select < Base
-        # >> select { |u| u.name == 'chris' } 
-        # => #call(:name)
+        # method calls
+        # converts
         def call(method)
           "#{method.to_s}:"
         end
 
-        # >> select { |u| u.name.downcase == 'chris' } 
-        # => #call(:name, :downcase)
+        # chained calls not supported
         def chained_call(*methods)
           # An idiom here is to call the chained method and pass it
           # the first method.
@@ -31,29 +26,26 @@ module Ambition
           raise "Not implemented yet."
         end
 
-        # &&
-        # >> select { |u| u.name == 'chris' && u.age == 22 }
-        # => #both( processed left side, processed right side )
+        # Handles generating an UltraSphinx query for code like:
+        #
+        #   'foo' && 'bar'
         def both(left, right)
           "#{quotify left} AND #{quotify right}"
         end
 
-        # ||
-        # >> select { |u| u.name == 'chris' || u.age == 22 }
-        # => #either( processed left side, processed right side )
+        # Handles generating an UltraSphinx query for code like:
+        #
+        #   'foo' || 'bar'
         def either(left, right)
           "#{quotify left} OR #{quotify right}"
         end
 
-        # >> select { |u| u.name == 'chris' }
-        # => #==( call(:name), 'chris' )
+        # Sphinx doesn't support equality.
         def ==(left, right)
           raise "Not applicable to sphinx."
         end
 
-        # !=
-        # >> select { |u| u.name != 'chris' }
-        # => #not_equal( call(:name), 'chris' )
+        # Sphinx doesn't support inequality.
         def not_equal(left, right)
           raise "Not applicable to sphinx."
         end

@@ -15,7 +15,7 @@ begin
     p.email          = 'josh@technicalpickles.com'
 
     p.project        = 'ambition'
-    p.url            = 'http://ambitious-sphinx.rubyforge.org/'
+    p.url            = 'http://ambitioussphinx.rubyforge.org/'
     p.test_pattern   = 'test/*_test.rb'
     p.version        = Version
     p.dependencies  << 'ambition >=0.5.0'

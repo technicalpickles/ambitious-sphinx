@@ -1,5 +1,5 @@
-module Ambition
-  module Adapters
+module Ambition #:nodoc:
+  module Adapters #:nodoc:
     module AmbitiousSphinx
       # Select is responsible for taking pure Ruby, and mangling it until it resembles
       # the syntax that Ultrasphinx[http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html] uses.

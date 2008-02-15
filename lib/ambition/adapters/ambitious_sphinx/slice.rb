@@ -1,5 +1,5 @@
-module Ambition
-  module Adapters
+module Ambition #:nodoc:
+  module Adapters #:nodoc:
     module AmbitiousSphinx
       class Slice < Base
         # >> User.first(5)

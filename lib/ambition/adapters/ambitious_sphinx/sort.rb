@@ -1,5 +1,5 @@
-module Ambition
-  module Adapters
+module Ambition #:nodoc:
+  module Adapters #:nodoc:
     module AmbitiousSphinx
       class Sort < Base
         # >> sort_by { |u| u.age }

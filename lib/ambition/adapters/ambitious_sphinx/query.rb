@@ -1,5 +1,5 @@
-module Ambition
-  module Adapters
+module Ambition #:nodoc:
+  module Adapters #:nodoc:
     module AmbitiousSphinx
       # Responsible for taking the clauses that Ambition has generated, and ultimately doing a
       # Ultrasphinx::Search based on them

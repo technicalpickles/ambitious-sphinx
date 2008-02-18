@@ -4,8 +4,10 @@ module Ambition #:nodoc:
       # Select is responsible for taking pure Ruby, and mangling it until it resembles
       # the syntax that Ultrasphinx[http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html] uses.
       class Select < Base
-        # method calls
-        # converts
+        
+        # Handles method calls, like
+        #
+        #   u.name
         def call(method)
           "#{method.to_s}:"
         end
@@ -73,31 +75,31 @@ module Ambition #:nodoc:
         end
 
         # Not supported by Sphinx. If you need this kind of comparison, you probably should be
-        # using ambitious-activerecord.
+        # using ambitious-activerecord instead.
         def <(left, right)
           raise "Not applicable to sphinx."
         end
 
         # Not supported by Sphinx. If you need this kind of comparison, you probably should be
-        # using ambitious-activerecord.
+        # using ambitious-activerecord instead.
         def >(left, right)
           raise "Not applicable to sphinx."
         end
 
         # Not supported by Sphinx. If you need this kind of comparison, you probably should be
-        # using ambitious-activerecord.
+        # using ambitious-activerecord instead.
         def >=(left, right)
           raise "Not applicable to sphinx."
         end
 
         # Not supported by Sphinx. If you need this kind of comparison, you probably should be
-        # using ambitious-activerecord.
+        # using ambitious-activerecord instead.
         def <=(left, right)
           raise "Not applicable to sphinx."
         end
 
         # Not supported by Sphinx. If you need this kind of comparison, you probably should be
-        # using ambitious-activerecord.
+        # using ambitious-activerecord instead.
         def include?(left, right)
           raise "Not applicable to sphinx."
         end

@@ -1,6 +1,6 @@
 module Ambition #:nodoc:
   module Adapters #:nodoc:
-    module AmbitiousSphinx
+    module AmbitiousSphinx #:nodoc:
       # Responsible for taking the clauses that Ambition has generated, and ultimately doing a
       # Ultrasphinx::Search based on them
       class Query < Base
@@ -13,7 +13,8 @@ module Ambition #:nodoc:
           raise "Not implemented yet."
         end
 
-        # Builds a hash of options for Ultrasphinx::Search based on the clauses Ambition has generated.
+        # Builds a hash of options for Ultrasphinx::Search based on the clauses Ambition
+        # has generated.
         def to_hash
           hash = {}
 

@@ -6,11 +6,9 @@ RAILS_ENV = "development" unless defined? RAILS_ENV
 
 require 'active_record'
 require 'ultrasphinx'
-require 'ambition/adapters/ambitious_sphinx/base'
-require 'ambition/adapters/ambitious_sphinx/query'
-require 'ambition/adapters/ambitious_sphinx/select'
-require 'ambition/adapters/ambitious_sphinx/sort'
-require 'ambition/adapters/ambitious_sphinx/slice'
+%w(base page query select sort slice).each do |base|
+  require "ambition/adapters/ambitious_sphinx/#{base}"
+end
 
 ##
 # This is where you inject Ambition into your target.

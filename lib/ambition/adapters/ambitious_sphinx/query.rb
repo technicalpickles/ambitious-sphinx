@@ -21,6 +21,10 @@ module Ambition #:nodoc:
             query_s = query.join(' ').squeeze(' ').strip 
             hash[:query] = quotify(query_s)
           end
+          
+          unless (page = clauses[:page]).blank?
+            hash[:page] = page.first
+          end
 
           hash
         end

@@ -1,5 +1,4 @@
-An Ambitious Sphinx Adapter
-===========================
+= An Ambitious Sphinx Adapter
 
 I don't know about you, but I like me some sexy full-text searching.
 
@@ -20,31 +19,49 @@ Cheese in the name, but not grilled?
   Meal.select {|m| m.name =~ 'bacon' && m.name !~ 'grilled'}
   
 
-### Big honking disclaimer
+== Big honking disclaimer
 
-We're still learning a lot about how sphinx and ambition work, so things are likely to change a lot.
+We're still learning a lot about how sphinx and ambition work, so things are likely to change a lot, and features are likely to be missing.
 
-### Getting Started
+== Getting Started
+
+
+=== Dependencies
 
 You will need the following gems to use ambitious-sphinx:
 
   gem install ambition
   gem install ultrasphinx
+
+=== Our stuff
+
+We don't have a gem yet, so presumably you'll do a clone of our git repo. Then you need to install it:
+
+
+  sudo rake install
   
-
-  Now install it as ambitious-sphinx:
-
-    sudo rake install
+=== Add it to your app
     
-  Require our files somewhere, like at the end of config/environment.rb
+Require our files somewhere, like at the end of config/environment.rb, maybe create config/initializers/sphinx.rb
+
+  require 'ultrasphinx'
+  require 'ambition/adapters/ambitious_sphinx'
   
-    require 'ambition/adapters/ambitious_sphinx'
+=== Sphinx and Ultrasphinx
     
-  You will also need to go through the motions of setting up ultrasphinx. This includes setting up sphinx itself, and modifying your model to indicate what's to be indexed, and so on.
+You will also need to go through the motions of setting up ultrasphinx.
 
-### Playing with the code base
+This includes:
 
-In addition to the other dependencies, you'll need:
+ * Configuring/installing sphinx
+ * Modifying your model to indicate what's to be indexed
+ * Bootstrapping ultrasphinx
+ 
+All this is discussed in detail in ultrasphinx's README
+
+== Playing with the code base
+
+In addition to the other dependencies, you'll need to:
 
   gem install echoe redgreen mocha test-spec
   
@@ -53,13 +70,13 @@ Run the tests with:
   rake test
   
 
-### More information on Sphinx:
+== More information on Sphinx:
 
  -> http://www.sphinxsearch.com/
  -> http://blog.evanweaver.com/articles/2007/07/09/ultrasphinx-searching-the-world-in-231-seconds/
  -> http://blog.evanweaver.com/files/doc/fauna/ultrasphinx/files/README.html
 
-### More information on Ambition:
+== More information on Ambition:
 
 -> http://ambition.rubyforge.org
 -> http://groups.google.com/group/ambition-rb/

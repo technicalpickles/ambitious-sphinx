@@ -1,9 +1,8 @@
 module Ambition #:nodoc:
   module Adapters #:nodoc:
     module AmbitiousSphinx #:nodoc:
-      
-      # Responsible for taking the clauses that Ambition has generated, and ultimately doing a
-      # Ultrasphinx::Search based on them
+      # Responsible for taking the clauses that Ambition has generated,
+      # and ultimately doing a Ultrasphinx::Search based on them
       class Query < Base
         def kick
           Ultrasphinx::Search.new(to_hash).results

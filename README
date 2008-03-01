@@ -2,6 +2,8 @@
 
 I don't know about you, but I like me some sexy full-text searching.
 
+== The basics
+
 Want to find all meals that mention bacon?
 
   Meal.select {'bacon'}
@@ -17,7 +19,15 @@ Maybe with bacon in the name, or cheese in the recipe?
 Cheese in the name, but not grilled?
 
   Meal.select {|m| m.name =~ 'bacon' && m.name !~ 'grilled'}
-  
+
+== Pagination
+
+You're going to want to use pagination. Ultrasphinx, the underlying library, only supports it, as in, you can't just get all the objects matching your query. You _have_ to use paging.
+
+It's pretty simple:
+
+  Meal.select {'bacon'}.page(2)
+  Meal.select {'bacon'}.page(3)
 
 == Big honking disclaimer
 
@@ -26,19 +36,9 @@ We're still learning a lot about how sphinx and ambition work, so things are lik
 == Getting Started
 
 
-=== Dependencies
+=== Installing
 
-You will need the following gems to use ambitious-sphinx:
-
-  gem install ambition
-  gem install ultrasphinx
-
-=== Our stuff
-
-We don't have a gem yet, so presumably you'll do a clone of our git repo. Then you need to install it:
-
-
-  sudo rake install
+  sudo gem install ambitious-sphinx
   
 === Add it to your app
     

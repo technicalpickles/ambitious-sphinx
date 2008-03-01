@@ -1,39 +1,34 @@
-module Ambition #:nodoc:
-  module Adapters #:nodoc:
-    module AmbitiousSphinx #:nodoc:
-      # Allows you to sort queries by particular fields.
-      # It is unsure how well this is supported by Ultrasphinx.
-      class Sort < Base
-        # Not implemented yet.
-        def sort_by(method)
-          raise "Not implemented yet."
-        end
+module Ambition::Adapters::AmbitiousSphinx
+  # +Sort+ would normally handle sorting, but we don't support it yet.
+  class Sort < Base
+    # Not implemented
+    def sort_by(method)
+      raise "Not implemented."
+    end
 
-        # Not implemented yet.
-        def reverse_sort_by(method)
-          raise "Not implemented yet."
-        end
+    # Not implemented
+    def reverse_sort_by(method)
+      raise "Not implemented."
+    end
 
-        # Not implemented yet.
-        def chained_sort_by(receiver, method)
-          raise "Not implemented yet."
-        end
+    # Not implemented
+    def chained_sort_by(receiver, method)
+      raise "Not implemented."
+    end
 
-        # Not implemented yet.
-        def chained_reverse_sort_by(receiver, method)
-          raise "Not implemented yet."
-        end
+    # Not implemented
+    def chained_reverse_sort_by(receiver, method)
+      raise "Not implemented."
+    end
 
-        # Not implemented yet.
-        def to_proc(symbol)
-          raise "Not implemented yet."
-        end
+    # Not implemented
+    def to_proc(symbol)
+      raise "Not implemented."
+    end
 
-        # Not implemented yet.
-        def rand
-          raise "Not implemented yet."
-        end
-      end
+    # Not implemented
+    def rand
+      raise "Not implemented."
     end
   end
 end

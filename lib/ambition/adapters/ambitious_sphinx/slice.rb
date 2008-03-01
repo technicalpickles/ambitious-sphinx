@@ -1,13 +1,7 @@
 module Ambition::Adapters::AmbitiousSphinx
+  # Slice would normally handle slicing, but we don't support it yet.
   class Slice < Base
-    # >> User.first(5)
-    # => #slice(0, 5)
-    #
-    # >> User.first
-    # => #slice(0, 1)
-    #
-    # >> User[10, 20]
-    # => #slice(10, 20)
+    # Not implemented
     def slice(start, length)
       raise "Not implemented."
     end

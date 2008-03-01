@@ -6,7 +6,7 @@ module Ambition::Adapters::AmbitiousSphinx
       Ultrasphinx::Search.new(to_hash).results
     end
 
-    # Some magic to add pagination. this gets called if you were to do:
+    # Some magic to add pagination. This gets called if you were to do:
     #
     #   Meal.select {'bacon'}.page(5)
     #
@@ -18,7 +18,7 @@ module Ambition::Adapters::AmbitiousSphinx
       context
     end
 
-    # Not entirely sure what this is for, so unimplemented so far.
+    # Not entirely sure when this is used, so unimplemented so far.
     def size
       raise "Not implemented yet."
     end

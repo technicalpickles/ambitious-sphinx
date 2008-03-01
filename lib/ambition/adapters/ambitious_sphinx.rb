@@ -1,6 +1,6 @@
-
 require 'ambition'
 
+# stub out rails stuff enough so that ultrasphinx will be happy
 RAILS_ROOT = "./" unless defined? RAILS_ROOT 
 RAILS_ENV = "development" unless defined? RAILS_ENV
 
@@ -12,21 +12,10 @@ module Ambition::Adapters
   end
 end
 
-%w(base page query select sort slice).each do |base|
-  require "ambition/adapters/ambitious_sphinx/#{base}"
+%w(base page query select sort slice).each do |f|
+  require "ambition/adapters/ambitious_sphinx/#{f}"
 end
 
-##
-# This is where you inject Ambition into your target.
-#
-# Use `extend' if you are injecting a class, `include' if you are
-# injecting instances of that class.
-#
-# You must also set the `ambition_adapter' class variable on your target
-# class, regardless of whether you are injecting instances or the class itself.
-#
-# You probably want something like this:
-#
 ActiveRecord::Base.extend Ambition::API
 ActiveRecord::Base.ambition_adapter = Ambition::Adapters::AmbitiousSphinx
 

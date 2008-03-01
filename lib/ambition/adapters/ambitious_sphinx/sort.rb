@@ -1,37 +1,32 @@
 module Ambition::Adapters::AmbitiousSphinx
+  # +Sort+ would normally handle sorting, but we don't support it yet.
   class Sort < Base
-    # >> sort_by { |u| u.age }
-    # => #sort_by(:age)
+    # Not implemented
     def sort_by(method)
       raise "Not implemented."
     end
 
-    # >> sort_by { |u| -u.age }
-    # => #reverse_sort_by(:age)
+    # Not implemented
     def reverse_sort_by(method)
       raise "Not implemented."
     end
 
-    # >> sort_by { |u| u.profile.name }
-    # => #chained_sort_by(:profile, :name)
+    # Not implemented
     def chained_sort_by(receiver, method)
       raise "Not implemented."
     end
 
-    # >> sort_by { |u| -u.profile.name }
-    # => #chained_reverse_sort_by(:profile, :name)
+    # Not implemented
     def chained_reverse_sort_by(receiver, method)
       raise "Not implemented."
     end
 
-    # >> sort_by(&:name)
-    # => #to_proc(:name)
+    # Not implemented
     def to_proc(symbol)
       raise "Not implemented."
     end
 
-    # >> sort_by { rand }
-    # => #rand
+    # Not implemented
     def rand
       raise "Not implemented."
     end

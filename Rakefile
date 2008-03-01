@@ -12,11 +12,11 @@ begin
     p.author         = 'Josh Nichols'
     p.email          = 'josh@technicalpickles.com'
 
-    p.project        = 'ambition'
+    p.project        = 'ambitioussphinx'
     p.url            = 'http://ambitioussphinx.rubyforge.org/'
     p.test_pattern   = 'test/*_test.rb'
-    p.version        = '0.1.0'
-    p.dependencies  << 'ambition >=0.5.0'
+    p.version        = '0.1.1'
+    p.dependencies  << 'ambition >=0.5.2'
   end
 
 rescue LoadError 

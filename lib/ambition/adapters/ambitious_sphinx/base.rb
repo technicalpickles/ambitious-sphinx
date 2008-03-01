@@ -1,6 +1,6 @@
-module Ambition
-  module Adapters
-    module AmbitiousSphinx
+module Ambition # :nodoc:
+  module Adapters # :nodoc:
+    module AmbitiousSphinx # :nodoc:
       # Helper for the other
       class Base
         # Does the string have an Ultrasphinx field?

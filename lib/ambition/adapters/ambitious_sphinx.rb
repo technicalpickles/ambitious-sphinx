@@ -1,8 +1,8 @@
 require 'ambition'
 
 # stub out rails stuff enough so that ultrasphinx will be happy
-RAILS_ROOT = "./" unless defined? RAILS_ROOT 
-RAILS_ENV = "development" unless defined? RAILS_ENV
+RAILS_ROOT = './' unless defined? RAILS_ROOT 
+RAILS_ENV = 'development' unless defined? RAILS_ENV
 
 require 'active_record'
 require 'ultrasphinx'
@@ -13,4 +13,3 @@ end
 
 ActiveRecord::Base.extend Ambition::API
 ActiveRecord::Base.ambition_adapter = Ambition::Adapters::AmbitiousSphinx
-

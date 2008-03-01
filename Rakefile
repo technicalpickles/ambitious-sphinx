@@ -1,7 +1,5 @@
 require 'rake'
 
-Version = '0.1.0'
-
 begin
   require 'rubygems'
   gem 'echoe', '>=2.7'
@@ -17,7 +15,7 @@ begin
     p.project        = 'ambition'
     p.url            = 'http://ambitioussphinx.rubyforge.org/'
     p.test_pattern   = 'test/*_test.rb'
-    p.version        = Version
+    p.version        = '0.1.0'
     p.dependencies  << 'ambition >=0.5.0'
   end
 

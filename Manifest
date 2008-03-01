@@ -2,7 +2,6 @@ ambitious-sphinx.gemspec
 config/ultrasphinx/default.base
 config/ultrasphinx/development.conf
 lib/ambition/adapters/ambitious_sphinx/base.rb
-lib/ambition/adapters/ambitious_sphinx/page.rb
 lib/ambition/adapters/ambitious_sphinx/query.rb
 lib/ambition/adapters/ambitious_sphinx/select.rb
 lib/ambition/adapters/ambitious_sphinx/slice.rb
